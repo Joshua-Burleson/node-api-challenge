@@ -6,8 +6,12 @@ const Projects = () => {
     useEffect(() => {
         axiosBase().get('/projects')
                    .then(res => {
-                       console.log(res.data);
-                       setProjectList(res.data);
+                       res.data.forEach(project => {
+                        axiosBase().get(`/projects/${project.id}`)
+                        .then( res => setProjectList([...projectList, res.data]) )
+                        .catch(err => console.log('Axios Error!! ', err))
+                       })
+                       
                    })
                    .catch(err => console.log('Axios Error! ', err))
     }, []);
