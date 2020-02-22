@@ -11,18 +11,18 @@ router.get('/', async (req, res) => {
         res.status(200).json(actions);
     }
     catch(exc){
-        res.status(500).json(exc);
+        res.status(503).json({message: "something went wrong"});
     }
 
 });
 
 router.post('/', validateAction, async (req, res) => {
     try {
-        const newAction = insert(req.action);
+        const newAction = await insert(req.action);
         res.status(201).json(newAction);
     }
     catch(exc){
-        res.status(500).json(exc);
+        res.status(503).json({message: "something went wrong"});
     }
 });
 
@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
         res.status(200).json(action);
     }
     catch(exc){
-        res.status(500).json(exc);
+        res.status(503).json({message: "something went wrong"});
     }
 
 });
@@ -44,7 +44,7 @@ router.put('/:id', validateAction, async (req, res) => {
         res.status(200).json(updatedAction);
     }
     catch(exc){
-        res.status(500).json(exc);
+        res.status(503).json({message: "something went wrong"});
     }
 });
 router.delete('/:id', async (req, res) => {
@@ -53,7 +53,7 @@ router.delete('/:id', async (req, res) => {
         res.status(200).json({message: `${deleted} records deleted`});
     }
     catch(exc){
-        res.status(500).json(exc);
+        res.status(503).json({message: "something went wrong"});
     }
 });
 
