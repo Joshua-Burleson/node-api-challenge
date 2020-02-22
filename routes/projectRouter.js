@@ -50,8 +50,8 @@ router.put('/:id', validateProject, async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try{
-        const deleted = await remove(req.actionID);
-        res.status(200).json({message: `${deleted} records deleted`});
+        const deleted = await remove(req.projectID);
+        res.status(200).json({message: `${deleted} record(s) deleted`});
     }
     catch(exc){
         res.status(503).json({message: "something went wrong"});
