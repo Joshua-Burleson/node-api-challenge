@@ -1,3 +1,25 @@
+const express = require('express');
+const cors = require('cors');
+
+const actionRouter = require('./routes/actionRouter');
+const projectRouter = require('./routes/projectRouter');
+
+const PORT = process.env.PORT || 3000;
+const app = express();
+
+app.use(express.json());
+app.use(cors());
+app.use('/api/actions', actionRouter);
+app.use('/api/projects', projectRouter);
+
+app.get('/', (req, res) => {
+    res.status(200).json({message: 'Schwifty API landing'});
+})
+
+
+app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
+
+
 /*
 play this: https://www.youtube.com/watch?v=d-diB65scQU
 
